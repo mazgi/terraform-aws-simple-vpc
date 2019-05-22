@@ -10,7 +10,8 @@ resource "aws_vpc" "main" {
 }
 
 resource "aws_vpc_dhcp_options" "this" {
-  domain_name = "${join(" ", var.domain_names)}"
+  domain_name         = "${join(" ", var.domain_names)}"
+  domain_name_servers = ["AmazonProvidedDNS"]
 }
 
 resource "aws_vpc_dhcp_options_association" "this" {

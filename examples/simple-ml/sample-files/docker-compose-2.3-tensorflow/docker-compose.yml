@@ -1,0 +1,7 @@
+version: '2.3'
+services:
+  tensorflow:
+    image: tensorflow/tensorflow:latest-gpu-py3-jupyter
+    runtime: nvidia
+    ports:
+      - 8888:8888
