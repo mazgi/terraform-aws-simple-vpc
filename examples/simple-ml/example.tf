@@ -1,12 +1,3 @@
-locals {
-  cidr_blocks_public_subnets = {
-    "${cidrsubnet("10.0.0.0/16",10,0)}" = "a"
-    "${cidrsubnet("10.0.0.0/16",10,1)}" = "b"
-    "${cidrsubnet("10.0.0.0/16",10,2)}" = "c"
-    "${cidrsubnet("10.0.0.0/16",10,3)}" = "d"
-  }
-}
-
 # --------------------------------
 # Main place (AWS) configuration
 
@@ -16,20 +7,6 @@ module "simple-ml-aws-vpc" {
   source = "../../"
 
   basename = "simple-ml"
-
-  domain_names = [
-    "simple-ml.internal",
-  ]
-
-  cidr_block_vpc             = "10.0.0.0/16"
-  cidr_blocks_public_subnets = "${local.cidr_blocks_public_subnets}"
-
-  cidr_blocks_private_subnets = {
-    "${cidrsubnet("10.0.0.0/16",8,4)}" = "a"
-    "${cidrsubnet("10.0.0.0/16",8,5)}" = "b"
-    "${cidrsubnet("10.0.0.0/16",8,6)}" = "c"
-    "${cidrsubnet("10.0.0.0/16",8,7)}" = "d"
-  }
 
   cidr_blocks_allow_ssh = [
     "192.0.2.0/24",                   # Your specific IP address range
@@ -90,7 +67,7 @@ resource "aws_instance" "simple-ml-gpu-instance-1" {
   ami           = "${data.aws_ami.simple-ml-ami-dl-ubuntu.id}"
   instance_type = "p3.2xlarge"
 
-  subnet_id = "${module.simple-ml-aws-vpc.aws_subnet.public.*.cidr_block[element(keys(local.cidr_blocks_public_subnets), 1)]}"
+  subnet_id = "${module.simple-ml-aws-vpc.aws_subnet.public.*.cidr_block[element(keys(module.simple-ml-aws-vpc.aws_subnet.public.*.cidr_block), 1)]}"
 
   vpc_security_group_ids = [
     "${module.simple-ml-aws-vpc.aws_security_group.allow-any-from-vpc.id}",
