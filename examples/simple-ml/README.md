@@ -1,4 +1,4 @@
-# example: Simple Machine Learning with AWS EC2
+# example: Create a simple Machine Learning environment with AWS EC2
 
 ## Recommends
 
@@ -20,10 +20,12 @@ export TF_VAR_current_external_ipaddr="$(curl -Ls ifconfig.io)/32"
 
 Create a S3 bucket for save tfstate.
 
+see https://docs.aws.amazon.com/cli/latest/reference/s3api/
+
 ```shellsession
 $ aws s3api create-bucket --bucket "${PROJECT_UUID}" --region us-east-1
 {
-    "Location": "/YOUR_PROJECT_UUID"
+    "Location": "/YOUR_UNIQ_STRING"
 }
 $ aws s3api put-bucket-versioning --bucket "${PROJECT_UUID}" --versioning-configuration Status=Enabled  
 $ aws s3api get-bucket-versioning --bucket "${PROJECT_UUID}"

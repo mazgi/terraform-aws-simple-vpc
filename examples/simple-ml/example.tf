@@ -1,5 +1,5 @@
 # --------------------------------
-# Main place (AWS) configuration
+# AWS VPC configuration
 
 module "simple-ml-aws-vpc" {
   #source = "mazgi/simple-vpc/aws"
