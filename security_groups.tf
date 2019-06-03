@@ -5,7 +5,7 @@
 
 resource "aws_security_group" "allow-any-from-vpc" {
   name   = "allow-any-from-vpc"
-  vpc_id = "${aws_vpc.main.id}"
+  vpc_id = aws_vpc.main.id
 
   ingress {
     from_port = 0
@@ -13,7 +13,7 @@ resource "aws_security_group" "allow-any-from-vpc" {
     protocol  = "-1"
 
     cidr_blocks = [
-      "${var.cidr_block_vpc}",
+      var.cidr_block_vpc,
     ]
   }
 
@@ -30,27 +30,27 @@ resource "aws_security_group" "allow-any-from-vpc" {
 
 resource "aws_security_group" "allow-ssh-from-specific-ranges" {
   name   = "allow-ssh-from-specific-ranges"
-  vpc_id = "${aws_vpc.main.id}"
+  vpc_id = aws_vpc.main.id
 
   ingress {
     from_port = 22
     to_port   = 22
     protocol  = "tcp"
 
-    cidr_blocks = ["${var.cidr_blocks_allow_ssh}"]
+    cidr_blocks = var.cidr_blocks_allow_ssh
   }
 }
 
 resource "aws_security_group" "allow-http-from-specific-ranges" {
   name   = "allow-http-from-specific-ranges"
-  vpc_id = "${aws_vpc.main.id}"
+  vpc_id = aws_vpc.main.id
 
   ingress {
     from_port = 80
     to_port   = 80
     protocol  = "tcp"
 
-    cidr_blocks = ["${var.cidr_blocks_allow_http}"]
+    cidr_blocks = var.cidr_blocks_allow_http
   }
 
   ingress {
@@ -58,6 +58,6 @@ resource "aws_security_group" "allow-http-from-specific-ranges" {
     to_port   = 443
     protocol  = "tcp"
 
-    cidr_blocks = ["${var.cidr_blocks_allow_http}"]
+    cidr_blocks = var.cidr_blocks_allow_http
   }
 }
