@@ -2,10 +2,10 @@
 # Terraform configuration
 
 terraform {
-  required_version = "0.11.14"
+  required_version = "0.12.0"
 
   required_providers {
-    aws = "2.10"
+    aws = "2.11"
   }
 
   backend "s3" {
