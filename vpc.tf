@@ -2,7 +2,8 @@
 # VPC
 
 resource "aws_vpc" "main" {
-  cidr_block = var.cidr_block_vpc
+  cidr_block           = var.cidr_block_vpc
+  enable_dns_hostnames = true
 
   tags = {
     Name = var.basename
