@@ -27,7 +27,7 @@ $ aws s3api create-bucket --bucket "${PROJECT_UUID}" --region us-east-1
 {
     "Location": "/YOUR_UNIQ_STRING"
 }
-$ aws s3api put-bucket-versioning --bucket "${PROJECT_UUID}" --versioning-configuration Status=Enabled  
+$ aws s3api put-bucket-versioning --bucket "${PROJECT_UUID}" --versioning-configuration Status=Enabled
 $ aws s3api get-bucket-versioning --bucket "${PROJECT_UUID}"
 {
     "Status": "Enabled"
