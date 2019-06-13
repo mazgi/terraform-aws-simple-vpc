@@ -1,9 +1,6 @@
-output "aws_instance-simple-ml-instances" {
+output "aws_instance-simple-ml-gpu-instance" {
   value = {
-    for instance in aws_instance.simple-ml-instance :
-    instance.tags["Name"] => {
-      "public_dns" = instance.public_dns,
-      "public_ip"  = instance.public_ip,
-    }
+    "public_dns" = aws_instance.simple-ml-gpu-instance.public_dns,
+    "public_ip"  = aws_instance.simple-ml-gpu-instance.public_ip,
   }
 }

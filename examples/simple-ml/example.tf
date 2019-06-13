@@ -58,7 +58,7 @@ resource "aws_key_pair" "simple-ml-operation-pubkey" {
   public_key = file(var.pubkey_file_path)
 }
 
-resource "aws_instance" "simple-ml-gpu-instance-1" {
+resource "aws_instance" "simple-ml-gpu-instance" {
   ami           = data.aws_ami.simple-ml-ami-dl-ubuntu.id
   instance_type = "p3.2xlarge"
 
@@ -84,6 +84,6 @@ resource "aws_instance" "simple-ml-gpu-instance-1" {
   #EOF
 
   tags = {
-    Name = "simple-ml-gpu-instance-1"
+    Name = "simple-ml-gpu-instance"
   }
 }
